@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01
+      author: DevTurgay
+      changes:
+        - createTable:
+            tableName: markets
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: branches
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: market_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseTableName: branches
+            baseColumnNames: market_id
+            constraintName: fk_market_id
+            referencedTableName: markets
+            referencedColumnNames: id
+        - createTable:
+            tableName: addresses
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: address
+                  type: varchar(650)
+        - createTable:
+            tableName: branch_addresses
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: branch_id
+                  type: BIGINT
+              - column:
+                  name: address_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: branch_addresses
+            baseColumnNames: branch_id
+            constraintName: fk_branch_id
+            referencedTableName: branches
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: branch_addresses
+            baseColumnNames: address_id
+            constraintName: fk_address_id
+            referencedTableName: addresses
+            referencedColumnNames: id
