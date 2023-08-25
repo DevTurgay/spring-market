@@ -1,9 +1,11 @@
 package com.market.market.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "markets")
 public class Market {
     @Id
@@ -21,7 +23,9 @@ public class Market {
 
     String name;
 
-    @OneToMany(mappedBy = "market")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "market", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+    @JsonIgnore
+    @ToString.Exclude
     List<Branch> branches;
 }

@@ -1,6 +1,6 @@
-package com.market.market.controllers.dto.request;
+package com.market.market.dto.request.market;
 
-import com.market.market.models.Branch;
+import com.market.market.dto.request.BranchRequestDto;
 import lombok.Data;
 
 import java.util.List;

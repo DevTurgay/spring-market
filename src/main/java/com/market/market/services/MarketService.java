@@ -1,10 +1,18 @@
 package com.market.market.services;
 
-import com.market.market.controllers.dto.request.MarketRequestDto;
+import com.market.market.dto.request.market.MarketRequestDto;
+import com.market.market.dto.request.market.MarketUpdateDto;
+import com.market.market.dto.response.MarketResponseDto;
 import com.market.market.models.Market;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 public interface MarketService {
-    public Market create(MarketRequestDto request);
+    MarketResponseDto create(MarketRequestDto request);
+
+    List<MarketResponseDto> findAll();
+
+    void delete(Market market);
+
+    MarketResponseDto update(Market market, MarketUpdateDto request);
 }

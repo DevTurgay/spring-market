@@ -1,5 +1,6 @@
 package com.market.market.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,5 +22,6 @@ public class Address {
         joinColumns = @JoinColumn(name = "address_id"),
         inverseJoinColumns = @JoinColumn(name = "branch_id")
     )
-    List<Branch> branch;
+    @JsonBackReference
+    List<Branch> branches;
 }
